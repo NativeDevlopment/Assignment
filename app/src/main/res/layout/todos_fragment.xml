@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.amarendra.weather.ui.WeatherViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.TodosFragment">
+    <TextView
+        android:id="@+id/tvArea"
+        android:layout_width="match_parent"
+        android:text="@{viewModel.addreessName}"
+        android:gravity="center"
+        android:textSize="@dimen/_16sdp"
+        android:textStyle="bold"
+        android:padding="@dimen/_5sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"/>
+
+
+    <FrameLayout
+
+        app:layout_constraintTop_toBottomOf="@+id/tvArea"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_height="match_parent">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:refreshing="@{viewModel.isLoading}"
+        app:onRefreshListener="@{() -> viewModel.onRefresh()}">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_delivery_address_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+
+        app:itemBinding="@{viewModel.myForecastListBinding}"
+        app:items="@{viewModel.forcastList}"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:text="Loading.."
+        android:visibility="@{viewModel.isLoading() ? View.VISIBLE :View.GONE}"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isError() ? View.VISIBLE :View.GONE}"
+
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Something went wrong"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_16sdp"
+                android:padding="@dimen/_5sdp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Pull to refresh for Give it another try"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp"
+                android:padding="@dimen/_5sdp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

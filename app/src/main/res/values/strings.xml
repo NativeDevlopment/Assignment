@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <!-- - - - - - - - - - - - - - -
+      - Used by SunshineDateUtils  -
+      - - - - - - - - - - - - - - -->
+
+    <!-- For labelling today's forecast -->
+    <string name="today">Today</string>
+
+    <!-- For labelling tomorrow's forecast -->
+    <string name="tomorrow">Tomorrow</string>
+
+
+
+
+</resources>
